@@ -311,6 +311,13 @@ public class CardSliderLayoutManager extends RecyclerView.LayoutManager
     }
 
     @Override
+    public void onItemsChanged(RecyclerView recyclerView) {
+        final int anchorPos = getActiveCardPosition();
+        scrollRequestedPosition = Math.min(anchorPos, getItemCount() - 1);
+        removeAllViews();
+    }
+
+    @Override
     public Parcelable onSaveInstanceState() {
         SavedState state = new SavedState();
         state.anchorPos = getActiveCardPosition();
